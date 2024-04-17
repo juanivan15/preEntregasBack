@@ -8,6 +8,8 @@ const PORT = 8080;
 import "./database.js";
 import sessionsRouter from "./routes/sessions.router.js";
 import viewsRouter from "./routes/views.router.js";
+import passport from "passport";
+import initializePassport from "./config/passport.config.js"
 
 //Middleware
 app.use(express.json());
@@ -36,6 +38,11 @@ app.use(session({
         mongoUrl:"mongodb+srv://juanivangonz15:mongodbcoder@cluster0.e2dhfiu.mongodb.net/Ecommerce?retryWrites=true&w=majority&appName=Cluster0", ttl: 100
     })
 }))
+
+//Passport
+initializePassport();
+app.use(passport.initialize())
+app.use(passport.session()) 
 
 //Rutas
 
